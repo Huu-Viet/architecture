@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "version": "1.0.0",
+  "priority": 1,
+  "settings": {
+    "defaultTitle": "My Website",
+    "defaultDescription": "Welcome to my amazing website",
+    "defaultKeywords": ["website", "awesome", "content"],
+    "addMetaTags": true,
+    "generateSitemap": true,
+    "robotsAllowed": true
+  },
+  "rules": {
+    "maxTitleLength": 60,
+    "maxDescriptionLength": 160,
+    "maxKeywords": 10
+  }
+}

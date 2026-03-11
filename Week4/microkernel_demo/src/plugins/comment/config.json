@@ -1,0 +1,24 @@
+{
+  "enabled": true,
+  "version": "1.0.0",
+  "priority": 2,
+  "settings": {
+    "moderationEnabled": true,
+    "allowGuestComments": true,
+    "requireApproval": true,
+    "maxCommentLength": 1000,
+    "allowReplies": true,
+    "maxReplyDepth": 3,
+    "notificationEmail": "admin@example.com"
+  },
+  "filters": {
+    "badWords": ["spam", "inappropriate"],
+    "blockedIPs": [],
+    "blockedEmails": []
+  },
+  "storage": {
+    "type": "memory",
+    "autoSave": true,
+    "backupInterval": 3600000
+  }
+}

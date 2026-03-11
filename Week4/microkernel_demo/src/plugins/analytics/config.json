@@ -1,0 +1,37 @@
+{
+  "enabled": true,
+  "version": "1.0.0",
+  "priority": 3,
+  "settings": {
+    "trackPageViews": true,
+    "trackUserActions": true,
+    "trackPerformance": true,
+    "sessionTimeout": 1800000,
+    "cookieConsent": true,
+    "anonymizeIP": true,
+    "realTimeTracking": true
+  },
+  "metrics": {
+    "pageViews": true,
+    "uniqueVisitors": true,
+    "bounceRate": true,
+    "sessionDuration": true,
+    "conversionRate": true,
+    "topPages": true,
+    "referrers": true,
+    "devices": true,
+    "geolocation": false
+  },
+  "reporting": {
+    "dailyReports": true,
+    "weeklyReports": true,
+    "monthlyReports": true,
+    "exportFormats": ["json", "csv"],
+    "emailReports": false
+  },
+  "privacy": {
+    "respectDNT": true,
+    "dataRetention": 365,
+    "gdprCompliant": true
+  }
+}
