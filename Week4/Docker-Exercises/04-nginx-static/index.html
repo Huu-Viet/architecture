@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nginx Static Site</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: Georgia, serif;
+      background: linear-gradient(135deg, #f8fafc, #dbeafe);
+      color: #0f172a;
+    }
+
+    .panel {
+      width: min(620px, calc(100% - 32px));
+      padding: 40px 32px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12);
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 6vw, 48px);
+    }
+
+    p {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <h1>Hello from Nginx</h1>
+    <p>This static website is being served from nginx:latest in Docker.</p>
+  </main>
+</body>
+</html>
