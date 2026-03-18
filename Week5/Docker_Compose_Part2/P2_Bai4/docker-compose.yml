@@ -1,0 +1,9 @@
+services:
+  node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: p2-bai4-node-app
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
