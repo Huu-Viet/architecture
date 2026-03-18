@@ -1,0 +1,55 @@
+NAME      IMAGE     COMMAND   SERVICE   CREATED   STATUS    PORTS
+
+{
+    "status":  "ok",
+    "timestamp":  "2026-03-18T06:50:37.107Z",
+    "services":  {
+                     "postgres":  {
+                                      "host":  "postgres",
+                                      "port":  5432,
+                                      "status":  "up"
+                                  },
+                     "redis":  {
+                                   "host":  "redis",
+                                   "port":  6379,
+                                   "status":  "up"
+                               },
+                     "rabbitmq":  {
+                                      "host":  "rabbitmq",
+                                      "port":  5672,
+                                      "status":  "up"
+                                  }
+                 }
+}
+
+{
+    "value":  [
+                  {
+                      "id":  "res-001",
+                      "name":  "Pho 24h",
+                      "cuisine":  "Vietnamese",
+                      "isOpen":  true
+                  },
+                  {
+                      "id":  "res-002",
+                      "name":  "Burger Station",
+                      "cuisine":  "Fast Food",
+                      "isOpen":  true
+                  }
+              ],
+    "Count":  2
+}
+
+{
+    "orderId":  "ord-1773816637225",
+    "restaurantId":  "res-001",
+    "userId":  "user-001",
+    "items":  [
+                  "pho-bo",
+                  "tra-da"
+              ],
+    "totalAmount":  125000,
+    "status":  "PENDING",
+    "createdAt":  "2026-03-18T06:50:37.225Z",
+    "note":  "Stub order created in monolith phase."
+}

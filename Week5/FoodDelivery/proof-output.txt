@@ -1,0 +1,59 @@
+NAME                     IMAGE                      COMMAND                  SERVICE    CREATED         STATUS                   PORTS
+food-delivery-api        fooddelivery-api           "docker-entrypoint.sGǪ"   api        4 minutes ago   Up 4 minutes             0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp
+food-delivery-postgres   postgres:15-alpine         "docker-entrypoint.sGǪ"   postgres   4 minutes ago   Up 4 minutes (healthy)   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
+food-delivery-rabbitmq   rabbitmq:3.13-management   "docker-entrypoint.sGǪ"   rabbitmq   4 minutes ago   Up 4 minutes (healthy)   0.0.0.0:5672->5672/tcp, [::]:5672->5672/tcp, 0.0.0.0:15672->15672/tcp, [::]:15672->15672/tcp
+food-delivery-redis      redis:7-alpine             "docker-entrypoint.sGǪ"   redis      4 minutes ago   Up 4 minutes (healthy)   0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp
+
+{
+    "status":  "ok",
+    "timestamp":  "2026-03-18T06:51:10.279Z",
+    "services":  {
+                     "postgres":  {
+                                      "host":  "postgres",
+                                      "port":  5432,
+                                      "status":  "up"
+                                  },
+                     "redis":  {
+                                   "host":  "redis",
+                                   "port":  6379,
+                                   "status":  "up"
+                               },
+                     "rabbitmq":  {
+                                      "host":  "rabbitmq",
+                                      "port":  5672,
+                                      "status":  "up"
+                                  }
+                 }
+}
+
+{
+    "value":  [
+                  {
+                      "id":  "res-001",
+                      "name":  "Pho 24h",
+                      "cuisine":  "Vietnamese",
+                      "isOpen":  true
+                  },
+                  {
+                      "id":  "res-002",
+                      "name":  "Burger Station",
+                      "cuisine":  "Fast Food",
+                      "isOpen":  true
+                  }
+              ],
+    "Count":  2
+}
+
+{
+    "orderId":  "ord-1773816670367",
+    "restaurantId":  "res-001",
+    "userId":  "user-001",
+    "items":  [
+                  "pho-bo",
+                  "tra-da"
+              ],
+    "totalAmount":  125000,
+    "status":  "PENDING",
+    "createdAt":  "2026-03-18T06:51:10.367Z",
+    "note":  "Stub order created in monolith phase."
+}
