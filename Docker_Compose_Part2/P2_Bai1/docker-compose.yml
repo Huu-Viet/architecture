@@ -1,6 +1,0 @@
-services:
-  nginx:
-    image: nginx:latest
-    container_name: p2-bai1-nginx
-    ports:
-      - "8080:80"

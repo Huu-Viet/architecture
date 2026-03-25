@@ -1,0 +1,19 @@
+# ⚠️ SINGLE-STAGE VERSION (Inefficient - for comparison)
+# This builds everything in one stage without optimization
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+COPY package.json ./
+RUN npm install
+
+COPY . .
+ARG VITE_API_BASE_URL=http://localhost:3000
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+RUN npm run build
+
+# Keep build tools and dev dependencies in image (wasteful!)
+FROM node:20-alpine
+COPY --from=builder /app /app
+WORKDIR /app
+EXPOSE 80
+CMD ["npm", "run", "preview"]
