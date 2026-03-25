@@ -2,56 +2,62 @@
 
 ## 1. Database Partitioning là gì?
 
-Database Partitioning là kỹ thuật chia nhỏ dữ liệu của một bảng lớn thành nhiều phần nhỏ hơn (gọi là partition) để:
-- Tăng hiệu năng truy vấn
-- Dễ quản lý dữ liệu
-- Scale hệ thống tốt hơn
+Database Partitioning là phương pháp chia một bảng dữ liệu lớn thành nhiều phần nhỏ hơn (gọi là *partition*). Việc này giúp:
+
+- Cải thiện hiệu năng truy vấn  
+- Đơn giản hóa việc quản lý dữ liệu  
+- Tăng khả năng mở rộng của hệ thống  
 
 ---
 
 ## 2. Vertical Partitioning (Phân vùng theo chiều dọc)
 
 ### Khái niệm
-Vertical Partitioning là chia bảng theo **cột (columns)**.
 
-Mỗi partition sẽ chứa một nhóm cột của bảng gốc.
+Vertical Partitioning là cách tách bảng dựa trên **các cột (columns)**.  
+Mỗi partition sẽ chứa một tập hợp cột riêng biệt của bảng gốc.
 
 ### Ví dụ
 
 Bảng `Users` ban đầu:
 
 | id | name | email | address | avatar | bio |
-|----|------|-------|--------|--------|-----|
+|----|------|-------|---------|--------|-----|
 
-Chia thành 2 bảng:
+Sau khi phân vùng:
 
 **Users_basic**
+
 | id | name | email |
 |----|------|-------|
 
 **Users_profile**
-| id | address | avatar | bio |
-|----|----------|--------|-----|
 
-### Khi nào dùng?
-- Một số cột ít khi sử dụng (VD: avatar, bio)
-- Muốn giảm lượng dữ liệu khi query
+| id | address | avatar | bio |
+|----|---------|--------|-----|
+
+### Khi áp dụng
+
+- Một số cột ít được sử dụng  
+- Muốn giảm lượng dữ liệu đọc khi truy vấn  
 
 ### Ưu điểm
-- Tăng tốc truy vấn (chỉ lấy cột cần thiết)
-- Giảm I/O
+
+- Truy vấn nhanh hơn do chỉ lấy dữ liệu cần thiết  
+- Giảm chi phí I/O  
 
 ### Nhược điểm
-- Phải JOIN lại khi cần đầy đủ dữ liệu
+
+- Cần JOIN khi muốn lấy đầy đủ thông tin  
 
 ---
 
 ## 3. Horizontal Partitioning (Phân vùng theo chiều ngang)
 
 ### Khái niệm
-Horizontal Partitioning là chia bảng theo **dòng (rows)**.
 
-Mỗi partition chứa một tập con các bản ghi.
+Horizontal Partitioning là cách chia bảng theo **các dòng (rows)**.  
+Mỗi partition chứa một nhóm bản ghi riêng.
 
 ### Ví dụ
 
@@ -63,66 +69,74 @@ Bảng `Orders`:
 Chia theo năm:
 
 **Orders_2023**
+
 | id | user_id | amount | created_at |
 |----|---------|--------|------------|
 
 **Orders_2024**
+
 | id | user_id | amount | created_at |
 
-### Hoặc theo user_id:
+Hoặc chia theo `user_id`:
 
-- Server 1: user_id từ 1–1000
-- Server 2: user_id từ 1001–2000
+- Server 1: user_id từ 1–1000  
+- Server 2: user_id từ 1001–2000  
 
-### Khi nào dùng?
-- Dữ liệu rất lớn (big data)
-- Cần scale ngang (sharding)
+### Khi áp dụng
+
+- Dữ liệu có kích thước rất lớn  
+- Cần mở rộng hệ thống theo chiều ngang (sharding)  
 
 ### Ưu điểm
-- Tăng hiệu năng query
-- Scale dễ dàng (có thể đặt ở nhiều server)
+
+- Tăng hiệu năng truy vấn  
+- Dễ dàng phân tán dữ liệu sang nhiều server  
 
 ### Nhược điểm
-- Query phức tạp hơn (phải biết partition nào chứa data)
-- Khó JOIN giữa partitions
+
+- Truy vấn phức tạp hơn (cần xác định đúng partition)  
+- Khó thực hiện JOIN giữa các partition  
 
 ---
 
 ## 4. Functional Partitioning (Phân vùng theo chức năng)
 
 ### Khái niệm
-Functional Partitioning là chia hệ thống database theo **chức năng nghiệp vụ (business logic)**.
 
-Mỗi service/module có database riêng.
+Functional Partitioning là cách tổ chức database dựa trên **chức năng nghiệp vụ (business logic)**.  
+Mỗi module hoặc service sẽ có database riêng.
 
 ### Ví dụ
 
 Hệ thống e-commerce:
 
 - **User Service DB**
-  - users
-  - profiles
+  - users  
+  - profiles  
 
 - **Order Service DB**
-  - orders
-  - order_items
+  - orders  
+  - order_items  
 
 - **Product Service DB**
-  - products
-  - categories
+  - products  
+  - categories  
 
-### Khi nào dùng?
-- Kiến trúc Microservices
-- Hệ thống lớn, nhiều module
+### Khi áp dụng
+
+- Kiến trúc Microservices  
+- Hệ thống lớn với nhiều module độc lập  
 
 ### Ưu điểm
-- Tách biệt rõ ràng
-- Dễ scale từng phần
-- Giảm phụ thuộc giữa các module
+
+- Phân tách rõ ràng giữa các thành phần  
+- Dễ mở rộng từng phần riêng biệt  
+- Giảm sự phụ thuộc giữa các module  
 
 ### Nhược điểm
-- Khó query cross-service
-- Phải dùng API hoặc message queue để giao tiếp
+
+- Khó truy vấn dữ liệu giữa các service  
+- Cần API hoặc message queue để giao tiếp  
 
 ---
 
@@ -131,15 +145,15 @@ Hệ thống e-commerce:
 | Loại | Chia theo | Mục đích chính | Ví dụ |
 |------|----------|----------------|-------|
 | Vertical | Cột | Tối ưu truy vấn | Tách profile |
-| Horizontal | Dòng | Scale dữ liệu | Sharding |
-| Functional | Chức năng | Microservices | User / Order DB |
+| Horizontal | Dòng | Mở rộng dữ liệu | Sharding |
+| Functional | Chức năng | Tổ chức hệ thống | User / Order DB |
 
 ---
 
 ## 6. Tổng kết
 
-- **Vertical Partitioning** → tối ưu hiệu năng truy vấn theo cột  
-- **Horizontal Partitioning** → xử lý dữ liệu lớn, scale hệ thống  
-- **Functional Partitioning** → tổ chức hệ thống theo nghiệp vụ  
+- **Vertical Partitioning**: tối ưu truy vấn theo cột  
+- **Horizontal Partitioning**: xử lý dữ liệu lớn và scale hệ thống  
+- **Functional Partitioning**: phân chia theo nghiệp vụ  
 
-Trong thực tế, hệ thống lớn thường **kết hợp cả 3 loại** để đạt hiệu quả tốt nhất.
+Trong thực tế, các hệ thống lớn thường kết hợp cả ba phương pháp để đạt hiệu quả tối ưu.
